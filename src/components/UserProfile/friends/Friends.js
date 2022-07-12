@@ -1,16 +1,25 @@
 import React, { useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import classes from "./Friends.module.css";
-import Card1 from "./Card";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { clickFriendActions } from "../../../store-redux/clickedFriendsSlice";
 import ScrollLoading from "../../shared/loadingWhileScroll/ScrollLoading";
+import Card from "../../shared/card/Card";
 import { useState } from "react";
 import Loading from "../../shared/loading/Loading";
 
 function Friends(props) {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [scrollLoading, setScrollLoading] = useState(false);
   const [data, setData] = useState([]);
   const [page, setPage] = useState(3);
   const { id } = useParams();
+  const cardClickListener = (id,user) =>{
+    dispatch(clickFriendActions.addFriend(user));
+    navigate(`/user/${id}`, { replace: false });
+  }
   const takeFriendsById = useCallback(
     async (page, size) => {
       try {
@@ -50,7 +59,8 @@ function Friends(props) {
   return (
     <div className={classes.friends}>
       {data.map((state) => (
-        <Card1
+        <Card
+         onClick = {cardClickListener}
           setChange={props.setChange}
           key={state.id}
           id={state.id}

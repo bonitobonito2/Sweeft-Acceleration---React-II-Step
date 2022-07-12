@@ -1,20 +1,19 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { clickFriendActions } from "../../../store-redux/clickedFriendsSlice";
+
 import classes from "./Card.module.css";
 function Card(props) {
-  const navigate = useNavigate();
-  const dispatch = useDispatch()
+
+  const user = {
+    name : props.name,
+    lastname : props.lastname,
+    prefix : props.prefix,
+    id : props.id
+  }
   const clickListener = () => {
-    dispatch(clickFriendActions.addFriend({
-      name : props.name,
-      lastname : props.lastname,
-      prefix : props.prefix,
-      id : props.id
-    }))
-    console.log("clicked");
-    navigate(`/user/${props.id}`, { replace: false });
+
+   props.onClick(props.id,user)
   };
   return (
     <div onClick={clickListener} className={classes.card}>
