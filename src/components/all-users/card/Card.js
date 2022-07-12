@@ -10,7 +10,7 @@ function Card(props) {
   return (
     <div onClick={clickListener} className={classes.card}>
       <div className={classes.content}>
-        <img src={props.imageUrl} alt="profile pic" />
+        <img src={`${props.imageUrl}/v/${props.id}`} alt="profile pic" />
         <div>
           <h3>
             {props.prefix} {props.name} {props.lastname}
