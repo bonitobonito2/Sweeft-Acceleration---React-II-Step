@@ -1,37 +1,33 @@
-.People{
-    display: flex;
-    flex-direction: row;
-  
-    flex-wrap: wrap;
-    margin: 0 auto;
-    width: 68%;
-    align-items: center;
-    justify-content: center
+.People {
+  display: flex;
+  flex-direction: row;
+
+  flex-wrap: wrap;
+  margin: 0 auto;
+  width: 68%;
+  align-items: center;
+  justify-content: center;
 }
 @media screen and (max-width: 800px) {
-    .People{
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto;
-        flex-wrap: wrap;
-        width: 100%;
-    }
-  
+  .People {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    width: 100%;
   }
+}
 
-
-
-  @media screen and (max-width: 1200px) {
-    .People{
-        display: flex;
-        flex-direction: row;
-        margin: 0 auto;
-        flex-wrap: wrap;
-        width: 100%;
-        align-items: center;
-        justify-content: center
-    }
-  
+@media screen and (max-width: 1200px) {
+  .People {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
   }
+}

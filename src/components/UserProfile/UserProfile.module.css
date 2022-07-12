@@ -4,7 +4,6 @@
   border-left: 1px solid black;
   border-right: 1px solid black;
 }
-
 @media only screen and (max-width: 990px) {
   .conteiner {
     width: 95%;
@@ -12,7 +11,6 @@
     border: 0 solid black;
   }
 }
-
 @media only screen and (max-width: 1550px) {
   .conteiner {
     width: 85%;

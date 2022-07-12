@@ -1,8 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-let initialState = {
-  clickedFriends: [],
-};
+let initialState = { clickedFriends: [] };
 
 const clickedFriendsSlice = createSlice({
   name: "clicked Friends",
@@ -18,5 +16,4 @@ const clickedFriendsSlice = createSlice({
 });
 
 export const clickFriendActions = clickedFriendsSlice.actions;
-
 export default clickedFriendsSlice;

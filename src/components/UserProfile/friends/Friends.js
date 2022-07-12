@@ -1,18 +1,16 @@
-import React, { useEffect, useCallback } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useCallback, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import classes from "./Friends.module.css";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { clickFriendActions } from "../../../store-redux/clickedFriendsSlice";
 import ScrollLoading from "../../shared/loadingWhileScroll/ScrollLoading";
 import Card from "../../shared/card/Card";
-import { useState } from "react";
-import Loading from "../../shared/loading/Loading";
 
-function Friends(props) {
+function Friends() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [scrollLoading, setScrollLoading] = useState(false);
+  const [error, setError] = useState(false);
   const [data, setData] = useState([]);
   const [page, setPage] = useState(3);
   const { id } = useParams();
@@ -27,14 +25,13 @@ function Friends(props) {
           `http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/${id}/friends/${page}/${size}`
         );
         const data = await result.json();
-
         setPage((state) => (state = state + 1));
         setData((state) => state.concat(data.list));
-        setScrollLoading(false);
+        setError(false);
       } catch (err) {
-        console.log(err);
-        setScrollLoading(false);
+        setError(true);
       }
+      setScrollLoading(false);
     },
     [id]
   );
@@ -42,7 +39,7 @@ function Friends(props) {
     setData([]);
     takeFriendsById(1, 16);
   }, [id, takeFriendsById]);
-  
+
   window.onscroll = () => {
     if (
       window.innerHeight + document.documentElement.scrollTop >
@@ -52,23 +49,12 @@ function Friends(props) {
       takeFriendsById(page, 8);
     }
   };
-  if (!data) {
-    return <Loading />;
-  }
+
+  if (error || !data) return <div>something went wrong</div>;
   return (
     <div className={classes.friends}>
       {data.map((state) => (
-        <Card
-          onClick={cardClickListener}
-          setChange={props.setChange}
-          key={state.id}
-          id={state.id}
-          name={state.name}
-          lastname={state.lastName}
-          imageUrl={state.imageUrl}
-          title={state.title}
-          prefix={state.prefix}
-        />
+        <Card onClick={cardClickListener} key={state.id} info={state} />
       ))}
       {scrollLoading && <ScrollLoading />}
     </div>
