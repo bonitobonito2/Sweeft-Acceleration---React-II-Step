@@ -10,16 +10,16 @@ import { useState } from "react";
 import Loading from "../../shared/loading/Loading";
 
 function Friends(props) {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [scrollLoading, setScrollLoading] = useState(false);
   const [data, setData] = useState([]);
   const [page, setPage] = useState(3);
   const { id } = useParams();
-  const cardClickListener = (id,user) =>{
+  const cardClickListener = (id, user) => {
     dispatch(clickFriendActions.addFriend(user));
     navigate(`/user/${id}`, { replace: false });
-  }
+  };
   const takeFriendsById = useCallback(
     async (page, size) => {
       try {
@@ -30,11 +30,9 @@ function Friends(props) {
 
         setPage((state) => (state = state + 1));
         setData((state) => state.concat(data.list));
-
         setScrollLoading(false);
       } catch (err) {
         console.log(err);
-
         setScrollLoading(false);
       }
     },
@@ -44,6 +42,7 @@ function Friends(props) {
     setData([]);
     takeFriendsById(1, 16);
   }, [id, takeFriendsById]);
+  
   window.onscroll = () => {
     if (
       window.innerHeight + document.documentElement.scrollTop >
@@ -60,7 +59,7 @@ function Friends(props) {
     <div className={classes.friends}>
       {data.map((state) => (
         <Card
-         onClick = {cardClickListener}
+          onClick={cardClickListener}
           setChange={props.setChange}
           key={state.id}
           id={state.id}

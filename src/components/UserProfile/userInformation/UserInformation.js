@@ -29,7 +29,7 @@ function UserInformation() {
   }
   return (
     <div className={classes.header}>
-      <img src={`${singleUserInformation.imageUrl}/v/${singleUserInformation.id}`} alt="profile" />
+      <img src={`${singleUserInformation.imageUrl}?v=${singleUserInformation.id}`}  alt="profile" />
       <fieldset className={classes.middleInfo}>
         <legend>Info</legend>
         <div>

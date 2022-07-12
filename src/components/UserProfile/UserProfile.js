@@ -4,6 +4,7 @@ import Friends from "./friends/Friends";
 
 import ClickedFriends from "./clickedFriends/ClickedFriends";
 import classes from "./UserProfile.module.css";
+
 function UserDetails() {
   return (
     <div className={classes.conteiner}>

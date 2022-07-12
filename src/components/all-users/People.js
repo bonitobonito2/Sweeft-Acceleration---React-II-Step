@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect, useState } from "react";
-
 import Card from "../shared/card/Card";
 import Loading from "../shared/loading/Loading";
 import ScrollLoading from "../shared/loadingWhileScroll/ScrollLoading";
@@ -8,19 +7,18 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { clickFriendActions } from "../../store-redux/clickedFriendsSlice";
 function People() {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [scrollLoading, setScrollLoading] = useState(false);
   const [data, setData] = useState([]);
   const [page, setPage] = useState(3);
- 
-    const clickListener = (id,user) => {
-      dispatch(clickFriendActions.addFriend(user))
-      console.log("clicked");
-      navigate(`/user/${id}`, { replace: false });
-    };
-  
+
+  const clickListener = (id, user) => {
+    dispatch(clickFriendActions.addFriend(user));
+    navigate(`/user/${id}`, { replace: false });
+  };
+
   const takeInformation = async (page, size) => {
     try {
       const result = await fetch(
@@ -65,7 +63,7 @@ function People() {
       <div className={classes.People}>
         {data.map((state) => (
           <Card
-            onClick = {clickListener}
+            onClick={clickListener}
             key={state.id}
             id={state.id}
             name={state.name}

@@ -1,5 +1,3 @@
-import Users from "./pages/all-users-page";
-import UserProfile from "./pages/user-profile";
 import { Route, Routes } from "react-router-dom";
 import routes from "./routes";
 
