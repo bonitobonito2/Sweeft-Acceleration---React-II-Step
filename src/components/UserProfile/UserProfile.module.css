@@ -1,0 +1,21 @@
+.conteiner {
+  width: 65%;
+  margin: 0 auto;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
+
+@media only screen and (max-width: 990px) {
+  .conteiner {
+    width: 95%;
+    margin: 0 auto;
+    border: 0 solid black;
+  }
+}
+
+@media only screen and (max-width: 1550px) {
+  .conteiner {
+    width: 85%;
+    margin: 0 auto;
+  }
+}
