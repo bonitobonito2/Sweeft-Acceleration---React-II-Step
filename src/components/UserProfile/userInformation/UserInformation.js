@@ -12,9 +12,9 @@ function UserInformation() {
       const result = await fetch(
         `http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/${id}`
       );
-      const dataString = await result.text();
-      const dataJson = await JSON.parse(dataString);
-      setSingleUserInformation(dataJson);
+      const data = await result.json();
+      
+      setSingleUserInformation(data);
     } catch (err) {
       console.log(err);
     }

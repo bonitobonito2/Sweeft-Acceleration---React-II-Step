@@ -17,10 +17,10 @@ function Friends(props) {
         const result = await fetch(
           `http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/${id}/friends/${page}/${size}`
         );
-        const dataString = await result.text();
-        const dataJson = await JSON.parse(dataString);
+        const data = await result.json();
+
         setPage((state) => (state = state + 1));
-        setData((state) => state.concat(dataJson.list));
+        setData((state) => state.concat(data.list));
 
         setScrollLoading(false);
       } catch (err) {

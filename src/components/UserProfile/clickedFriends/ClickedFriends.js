@@ -11,14 +11,20 @@ function ClickedFriends() {
   }
   return (
     <div className={classes.clickedFriends}>
-      {friends.map((state) => (
-        <Fragment>
-          <Link to={`/user/${state.id}`}>
-            {state.prefix} {state.name} {state.lastname}
-          </Link>{" "}
-          <span> {helper} </span>
-        </Fragment>
-      ))}
+      {friends.length !== 1 &&
+        friends.map((state) => (
+          <Fragment>
+            <Link to={`/user/${state.id}`}>
+              {state.prefix} {state.name} {state.lastname}
+            </Link>
+            <span> {helper} </span>
+          </Fragment>
+        ))}
+      {friends.length === 1 && (
+        <Link to={`/user/${friends[0].id}`}>
+          {friends[0].prefix} {friends[0].name} {friends[0].lastname}
+        </Link>
+      )}
     </div>
   );
 }
