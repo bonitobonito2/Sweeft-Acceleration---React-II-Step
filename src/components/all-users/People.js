@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
 import Card from "../shared/card/Card";
-import Loading from "../shared/loading/Loading";
 import ScrollLoading from "../shared/loadingWhileScroll/ScrollLoading";
 import classes from "./People.module.css";
 import { useNavigate } from "react-router-dom";
@@ -9,16 +8,14 @@ import { clickFriendActions } from "../../store-redux/clickedFriendsSlice";
 function People() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
   const [scrollLoading, setScrollLoading] = useState(false);
   const [data, setData] = useState([]);
   const [page, setPage] = useState(3);
-
+  const [error, setError] = useState(false);
   const clickListener = (id, user) => {
     dispatch(clickFriendActions.addFriend(user));
     navigate(`/user/${id}`, { replace: false });
   };
-
   const takeInformation = async (page, size) => {
     try {
       const result = await fetch(
@@ -27,17 +24,14 @@ function People() {
       const data = await result.json();
       setPage((state) => (state = state + 1));
       setData((state) => state.concat(data.list));
-      setLoading(false);
-      setScrollLoading(false);
+      setError(false);
     } catch (err) {
-      console.log(err);
-      setLoading(false);
-      setScrollLoading(false);
+      setError(true);
     }
+    setScrollLoading(false);
   };
 
   useEffect(() => {
-    setLoading(true);
     takeInformation([1], 16);
   }, []);
 
@@ -50,28 +44,12 @@ function People() {
       takeInformation(page, 8);
     }
   };
-
-  if (loading) {
-    return (
-      <div>
-        <Loading />
-      </div>
-    );
-  }
+  if (error || data.length === 0) return <div>something went wrong</div>;
   return (
     <Fragment>
       <div className={classes.People}>
         {data.map((state) => (
-          <Card
-            onClick={clickListener}
-            key={state.id}
-            id={state.id}
-            name={state.name}
-            lastname={state.lastName}
-            imageUrl={state.imageUrl}
-            title={state.title}
-            prefix={state.prefix}
-          />
+          <Card onClick={clickListener} key={state.id} info={state} />
         ))}
       </div>
       {scrollLoading && <ScrollLoading />}
