@@ -10,7 +10,6 @@ function UserDetails() {
       <UserInformation />
       <ClickedFriends />
       <h2>Friends : </h2>
-      <br />
       <Friends />
     </div>
   );

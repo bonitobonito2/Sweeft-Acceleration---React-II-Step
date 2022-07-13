@@ -8,7 +8,7 @@
 
 .header img {
   width: 22%;
-  height: 210px;
+  height: 190px;
 }
 .middleInfo {
   width: 50%;
@@ -23,7 +23,6 @@
 
 .rightInfo {
   width: 20%;
-
   border: 1px solid black;
 }
 .rightInfo span {

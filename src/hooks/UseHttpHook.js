@@ -7,6 +7,7 @@ const UseHttpHook = () => {
   const [scrollLoading, setScrollLoading] = useState(false);
   const getData = useCallback(
     async (url) => {
+      setScrollLoading(true)
       try {
         const result = await fetch(url);
         const data = await result.json();

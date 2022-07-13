@@ -9,7 +9,7 @@ function Friends() {
   const { id } = useParams();
   const clickListener = UseUserClickHandlerHook()
   const {error,data,page,scrollLoading,
-        setScrollLoading,getData,setData,} = UseHttpHook();
+       getData,setData,} = UseHttpHook();
 
   useEffect(() => {
     setData([]);
@@ -20,10 +20,7 @@ function Friends() {
     if (
       window.innerHeight + document.documentElement.scrollTop >
       document.documentElement.offsetHeight - 1
-    ) {
-      setScrollLoading(true);
-      getData(`http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/${id}/friends/${page}/8`)
-    }
+    ) getData(`http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/${id}/friends/${page}/8`)
   };
 
   if (error || !data) return <div>something went wrong</div>;
