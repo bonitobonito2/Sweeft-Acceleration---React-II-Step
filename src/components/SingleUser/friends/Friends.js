@@ -1,29 +1,15 @@
 import React, { useEffect} from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams} from "react-router-dom";
 import classes from "./Friends.module.css";
-import { useDispatch } from "react-redux";
-import { clickFriendActions } from "../../../store-redux/clickedFriendsSlice";
 import ScrollLoading from "../../shared/loadingWhileScroll/ScrollLoading";
 import Card from "../../shared/card/Card";
 import UseHttpHook from "../../../hooks/UseHttpHook";
-
+import UseUserClickHandlerHook from "../../../hooks/UseUserClickHandlerHook";
 function Friends() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const {
-    error,
-    data,
-    page,
-    scrollLoading,
-    setScrollLoading,
-    getData,
-    setData,
-  } = UseHttpHook();
   const { id } = useParams();
-  const cardClickListener = (id, user) => {
-    dispatch(clickFriendActions.addFriend(user));
-    navigate(`/user/${id}`, { replace: false });
-  };
+  const clickListener = UseUserClickHandlerHook()
+  const {error,data,page,scrollLoading,
+        setScrollLoading,getData,setData,} = UseHttpHook();
 
   useEffect(() => {
     setData([]);
@@ -44,7 +30,7 @@ function Friends() {
   return (
     <div className={classes.friends}>
       {data.map((state) => (
-        <Card onClick={cardClickListener} key={state.id} info={state} />
+        <Card onClick={clickListener} key={state.id} info={state} />
       ))}
       {scrollLoading && <ScrollLoading />}
     </div>
