@@ -2,7 +2,7 @@ import React, { Fragment, useEffect} from "react";
 import Card from "../shared/card/Card";
 import ScrollLoading from "../shared/loadingWhileScroll/ScrollLoading";
 import UseHttpHook from "../../hooks/UseHttpHook";
-import classes from "./Users.module.css";
+import classes from './Users.module.css'
 import UseUserClickHandlerHook from "../../hooks/UseUserClickHandlerHook";
 function Users() {
   const clickListener = UseUserClickHandlerHook()
@@ -24,7 +24,7 @@ function Users() {
   if (error || data.length === 0) return <div>something went wrong</div>;
   return (
     <Fragment>
-      <div className={classes.Users}>
+      <div className={classes.People}>
         {data.map((state) => (
           <Card onClick={clickListener} key={state.id} info={state} />
         ))}
