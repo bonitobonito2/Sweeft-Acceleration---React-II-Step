@@ -3,7 +3,7 @@ import classes from "./Card.module.css";
 function Card(props) {
   const user = {
     name: props.info.name,
-    lastname: props.info.lastname,
+    lastname: props.info.lastName,
     prefix: props.info.prefix,
     id: props.info.id,
   };
@@ -18,7 +18,7 @@ function Card(props) {
         />
         <div>
           <h3>
-            {props.info.prefix} {props.info.name} {props.info.lastname}
+            {props.info.prefix} {props.info.name} {props.info.lastName}
           </h3>
         </div>
         <div>

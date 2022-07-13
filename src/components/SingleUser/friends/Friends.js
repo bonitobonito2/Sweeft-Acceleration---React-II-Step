@@ -1,44 +1,34 @@
-import React, { useEffect, useCallback, useState } from "react";
+import React, { useEffect} from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import classes from "./Friends.module.css";
 import { useDispatch } from "react-redux";
 import { clickFriendActions } from "../../../store-redux/clickedFriendsSlice";
 import ScrollLoading from "../../shared/loadingWhileScroll/ScrollLoading";
 import Card from "../../shared/card/Card";
+import UseHttpHook from "../../../hooks/UseHttpHook";
 
 function Friends() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [scrollLoading, setScrollLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [data, setData] = useState([]);
-  const [page, setPage] = useState(3);
+  const {
+    error,
+    data,
+    page,
+    scrollLoading,
+    setScrollLoading,
+    getData,
+    setData,
+  } = UseHttpHook();
   const { id } = useParams();
   const cardClickListener = (id, user) => {
     dispatch(clickFriendActions.addFriend(user));
     navigate(`/user/${id}`, { replace: false });
   };
-  const takeFriendsById = useCallback(
-    async (page, size) => {
-      try {
-        const result = await fetch(
-          `http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/${id}/friends/${page}/${size}`
-        );
-        const data = await result.json();
-        setPage((state) => (state = state + 1));
-        setData((state) => state.concat(data.list));
-        setError(false);
-      } catch (err) {
-        setError(true);
-      }
-      setScrollLoading(false);
-    },
-    [id]
-  );
+
   useEffect(() => {
     setData([]);
-    takeFriendsById(1, 16);
-  }, [id, takeFriendsById]);
+    getData(`http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/${id}/friends/1/16`);
+  }, [id, getData, setData]);
 
   window.onscroll = () => {
     if (
@@ -46,7 +36,7 @@ function Friends() {
       document.documentElement.offsetHeight - 1
     ) {
       setScrollLoading(true);
-      takeFriendsById(page, 8);
+      getData(`http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/${id}/friends/${page}/8`)
     }
   };
 

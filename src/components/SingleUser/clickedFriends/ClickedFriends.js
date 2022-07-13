@@ -13,13 +13,12 @@ const Linkk = (props) => {
 
 function ClickedFriends() {
   const friends = useSelector((state) => state.clickedFriends);
-  if (friends.length === 0) return;
 
+  if (friends.length === 0) return;
   return (
     <div className={classes.clickedFriends}>
       {friends.length !== 1 ? (
         friends.map((state, index) => {
-          console.log(index);
           if (index === 0) return <Linkk info={state} />;
           else {
             return (

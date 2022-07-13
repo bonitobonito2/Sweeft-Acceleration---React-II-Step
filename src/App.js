@@ -2,7 +2,6 @@ import { Route, Routes } from "react-router-dom";
 import routes from "./routes";
 
 function App() {
-  console.log(routes);
   return (
     <div className="App">
       <Routes>
