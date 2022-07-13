@@ -7,22 +7,22 @@ import UseUserClickHandlerHook from "../../hooks/UseUserClickHandlerHook";
 function Users() {
   const clickListener = UseUserClickHandlerHook();
   const { error, data, page, scrollLoading, getData } = UseHttpHook();
-
   useEffect(() => {
     getData(
-      `http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/1/16`
+      `http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/1/20`
     );
   }, [getData]);
-
   window.onscroll = async () => {
     if (
       window.innerHeight + document.documentElement.scrollTop >
-      document.documentElement.offsetHeight - 1
-    )
-     await getData(
-        `http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/${page}/8`
+      document.documentElement.offsetHeight -1
+    ){
+      await getData(
+        `http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/${page}/10`
       );
+    }
   };
+
   if (error) return <div>something went wrong</div>;
   if (data.length === 0) return <ScrollLoading />;
   return (
