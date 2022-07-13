@@ -13,7 +13,7 @@ function Friends() {
   useEffect(() => {
     setData([]);
     getData(
-      `http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/${id}/friends/1/16`
+      `http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/${id}/friends/1/20`
     );
   }, [id, getData, setData]);
 
@@ -23,7 +23,7 @@ function Friends() {
       document.documentElement.offsetHeight - 1
     )
     await  getData(
-        `http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/${id}/friends/${page}/8`
+        `http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/${id}/friends/${page}/12`
       );
   };
 

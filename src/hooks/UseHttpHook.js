@@ -3,7 +3,7 @@ import { useState, useCallback } from "react";
 const UseHttpHook = () => {
   const [error, setError] = useState(false);
   const [data, setData] = useState([]);
-  const [page, setPage] = useState(3);
+  const [page, setPage] = useState(2);
   const [scrollLoading, setScrollLoading] = useState(false);
   const getData = useCallback(
     async (url) => {

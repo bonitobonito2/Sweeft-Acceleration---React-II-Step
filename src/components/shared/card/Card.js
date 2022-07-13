@@ -8,7 +8,6 @@ function Card(props) {
     id: props.info.id,
   };
   const clickListener = () => props.onClick(props.info.id, user);
-
   return (
     <div onClick={clickListener} className={classes.card}>
       <div className={classes.content}>
