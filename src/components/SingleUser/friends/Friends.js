@@ -8,22 +8,23 @@ import UseUserClickHandlerHook from "../../../hooks/UseUserClickHandlerHook";
 function Friends() {
   const { id } = useParams();
   const clickListener = UseUserClickHandlerHook();
-  const { error, data, page, scrollLoading, getData, setData } = UseHttpHook();
+  const { error, data, page, scrollLoading, getData, nextPage, setData } = UseHttpHook();
 
   useEffect(() => {
-    setData([]);
+    setData([])
     getData(
       `http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/${id}/friends/1/20`
     );
   }, [id, getData, setData]);
-
+  console.log(page);
   window.onscroll = async () => {
     if (
       window.innerHeight + document.documentElement.scrollTop >
-      document.documentElement.offsetHeight - 1
+        document.documentElement.offsetHeight - 1 &&
+      nextPage
     )
-    await  getData(
-        `http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/${id}/friends/${page}/12`
+      await getData(
+        `http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/${id}/friends/${page}/20`
       );
   };
 
